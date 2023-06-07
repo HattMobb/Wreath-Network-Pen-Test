@@ -40,5 +40,29 @@ Using a static nmap binary, supplied by my attacking machine, I scanned the inte
 ![Screenshot 2023-06-06 105638](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/06f8e8cc-5eae-48e8-afec-3c7f157d3487)
 
 Success, both .150 and .100 machines are fair game.
+Futher scanning of each machine individually revealed a few services running on .150 (including a web page) so I decided to attempt to pivot to this machine.
+Navigating to said web page didn't reveal much, however poor error handling practices pointed me towards a potential attack vector.
+
+![Screenshot 2023-06-06 112503](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/c427dd99-2315-4e9d-96d1-c07c2dc66c94)
+
+
+![Screenshot 2023-06-06 112608](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/17ec55a5-6cd0-40e0-8d6d-d951f9ce1de4)
+
+## Exploitation of internal network
+After a little research, I found a Remote Code Execution exploit that could be used against the GitStack page: https://www.exploit-db.com/exploits/43777
+
+Upon editing the exploit to my needs, I ran it and saw that commands were indeed being executed via a webshell:
+
+Shell function snippit:
+
+![Screenshot 2023-06-06 120701](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/d69d5b5b-908b-4762-8a30-0236eb650cc7)
+
+
+In action:
+
+![Screenshot 2023-06-06 120500](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/381ac367-3fda-4cef-9e14-9a86d91aa7a6)
+
+
+
 
 
