@@ -5,7 +5,7 @@ A write up of a pen test of the Wreath Network on TryHackMe
 
 ## Walkthrough
 
-## Enumeration
+## Enumeration of Web Server
 
 A quick scan reveals a few services open on the reachable web server: 
 
@@ -24,9 +24,21 @@ Running a quick vulnerability script against the site reveals a potential weak p
 
 ![Screenshot 2023-06-05 123525](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/2ec93739-f096-4de2-90ad-535f65a5b4a4)
 
+## Exploitation of Web Server
 I used the following tool to exploit this vulnerability: https://github.com/MuirlandOracle/CVE-2019-15107
 
 After configuring and running the script, I was granted a root shell on the server:
 ![Screenshot 2023-06-05 125304](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/c9c97089-e9fd-47cf-aa64-8e53db929eea)
+
+Following this, I made a copy of both the root password hash and ssh private key for future access.
+
+## Enumeration of internal network
+
+Using a static nmap binary, supplied by my attacking machine, I scanned the internal network for other hosts within scope.
+
+![Screenshot 2023-06-06 104945](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/6471e710-0afd-40b7-addb-cfa971bec375)
+![Screenshot 2023-06-06 105638](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/06f8e8cc-5eae-48e8-afec-3c7f157d3487)
+
+Success, both .150 and .100 machines are fair game.
 
 
