@@ -32,11 +32,19 @@ After configuring and running the script, I was granted a root shell on the serv
 
 Following this, I made a copy of both the root password hash and ssh private key for future access.
 
-## Enumeration of internal network
+# Pivoting 
 
-Using a static nmap binary, supplied by my attacking machine, I scanned the internal network for other hosts within scope.
+## Git server Enumeration
+
+Using a static nmap binary, supplied by my attacking machine, I scanned the internal network for other hosts within scope for potential targets to pivot to.
+
+![Screenshot 2023-06-06 105002](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/4608d90f-7fc2-4d1a-81e3-317be8d40e96)
+
 
 ![Screenshot 2023-06-06 104945](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/6471e710-0afd-40b7-addb-cfa971bec375)
+
+Scan result:
+
 ![Screenshot 2023-06-06 105638](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/06f8e8cc-5eae-48e8-afec-3c7f157d3487)
 
 Success, both .150 and .100 machines are fair game.
@@ -48,10 +56,13 @@ Navigating to said web page didn't reveal much, however poor error handling prac
 
 ![Screenshot 2023-06-06 112608](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/17ec55a5-6cd0-40e0-8d6d-d951f9ce1de4)
 
-## Exploitation of internal network
+(Sadly the default credentials didn't work).
+
+## Git server Exploitation 
+
 After a little research, I found a Remote Code Execution exploit that could be used against the GitStack page: https://www.exploit-db.com/exploits/43777
 
-Upon editing the exploit to my needs, I ran it and saw that commands were indeed being executed via a webshell:
+Upon editing the exploit to my needs (changing target, ports etc), I ran it and saw that commands were indeed being executed via a webshell:
 
 Shell function snippit:
 
