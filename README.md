@@ -95,6 +95,30 @@ Next I set up a Netcat listener on the .200 machine, and used a Powershell comma
 
 ![Screenshot 2023-06-07 110211](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/d280e7b2-4fe7-41f5-912e-35a0004d1c2e)
 
+Shortly after, I was rewarded with Administrator level access to the Git server:
+
+
+![Screenshot 2023-06-07 110231](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/75ee96a3-3a35-4742-a369-7ee1df40ff9d)
+
+From earlier enumeration, ports 3389(RDP GUI) and 5985(WinRM CLI) were found to be open. 
+Given that I was using an Admin account, I could create myself a new account that would be able to access the device via RDP whenever I wanted.
+
+
+![Screenshot 2023-06-07 110736](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/f4ceac67-2448-445b-a0ba-190117c81775)
+
+
+To connect over RDP from Ubuntu, I used xfreerdp:
+
+![Screenshot 2023-06-07 111609](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/c2827aab-1a19-4ed9-9cd7-4a0832264a47)
+
+And created a share for easy tool access:
+
+![Screenshot 2023-06-07 111847](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/3f71d2e1-9687-4f58-9186-4cc96688117e)
+
+
+
+
+
 
 
 
