@@ -132,6 +132,8 @@ Followed by `lsadump::sam` to get the hashes:
 
 ![Screenshot 2023-06-07 113153](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/f661470b-a432-4760-aab9-c201bb186365)
 
+After a few unsuccessful attempts and a wait, I managed to crack the hash for the user Thomas.
+
 
 
 
