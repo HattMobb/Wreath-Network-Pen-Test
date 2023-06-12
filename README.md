@@ -79,6 +79,21 @@ In action:
 
 ![Screenshot 2023-06-06 120500](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/381ac367-3fda-4cef-9e14-9a86d91aa7a6)
 
+In order to efficiently execute commands & gain information about the machine, I used BurpSuite to interact with the device:
+
+![Screenshot 2023-06-06 121901](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/f4080a43-904e-4a44-96fd-2fd3955cbaa8)
+
+
+In order to deploy a shell, the .150 machine needed to be able to reach/ communicate with my machine.
+I tested this via `ping` using the exploit and `tcpdump` on my machine, however no traffic was getting through successfully, indicating that it was being blocked (likely by a firewall).
+To navigate this issue, I opened a port, allowing traffic through the firewall:
+
+![Screenshot 2023-06-07 103640](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/2faf878d-3098-4288-8de7-59bae31cca4f)
+
+Next I set up a Netcat listener on the .200 machine, and used a Powershell command to create a shell to call back to it:
+
+
+![Screenshot 2023-06-07 110211](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/d280e7b2-4fe7-41f5-912e-35a0004d1c2e)
 
 
 
