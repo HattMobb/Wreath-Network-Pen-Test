@@ -49,7 +49,13 @@ Scan result:
 
 Success, both .150 and .100 machines are fair game.
 Futher scanning of each machine individually revealed a few services running on .150 (including a web page) so I decided to attempt to pivot to this machine.
-Navigating to said web page didn't reveal much, however poor error handling practices pointed me towards a potential attack vector.
+This was done using sshuttle - a program that works in a similar manner to a VPN, allowing direct connection to remote devices as if they were local.
+I was able to sign in as root on this machine using the SSH key from earlier. 
+
+![Screenshot 2023-06-06 111757](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/d6433b0f-5dfe-417a-8190-0bf627827211)
+
+
+Navigating to the web page hosted by 1.50 didn't reveal much, however poor error handling practices pointed me towards a potential attack vector.
 
 ![Screenshot 2023-06-06 112503](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/c427dd99-2315-4e9d-96d1-c07c2dc66c94)
 
