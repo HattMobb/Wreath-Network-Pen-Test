@@ -115,6 +115,22 @@ And created a share for easy tool access:
 
 ![Screenshot 2023-06-07 111847](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/3f71d2e1-9687-4f58-9186-4cc96688117e)
 
+Using this share, I was able to launch Mimikatz in order to dump local SAM hashes:
+
+
+
+![Screenshot 2023-06-07 112800](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/e482e10b-dfb4-45c3-af2d-07ff5eb7c8cd)
+
+From here, I used :
+
+`privilege::debug` essentially grants the process higher privileges, enabling it to bypass certain security restrictions.
+`token::elevate` attempts to elevate the current user's access token to a higher privilege level.
+
+Followed by `lsadump::sam` to get the hashes:
+
+
+
+![Screenshot 2023-06-07 113153](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/f661470b-a432-4760-aab9-c201bb186365)
 
 
 
