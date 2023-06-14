@@ -149,9 +149,37 @@ Referring back to the Network Map, only the personal PC remained to be compromis
 ![Screenshot 2023-06-06 123740](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/69e2c024-c647-4943-b284-6b655abfc086)
 
 As mentioned in the brief, this machine has an Anti-virus installed, so I had to be aware of this going forward.
+As the .100 machine (personal PC) is only accessible from the git-server, I had to create another proxy (through the git-server) to be able to reach the .100 host.
+I had previously used sshuttle to create a proxy between the Web server and Git server, and now a second one was necessary to reach the last machine. 
+The traffic flow would look as follows:
+
+Attacking Machine -> WebServer -> Git-Server -> Personal PC
+
 Given this was a Windows host and I was now accessing it via 2 proxies, nmap was unlikely to be of much use, so I uploaded the Portscan.ps1 script from Powersploit to the machine via WinRM.
 A scan of the final machine (.100) revealed ports 80 & 3389 to be open.
 
+I used chisel (https://github.com/jpillora/chisel) to create this final proxy.
+Firstly I opened a port on the git-server to allow traffic to traverse:
+
+![Screenshot 2023-06-07 115605](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/0876f6c2-ea22-4c68-b9f6-e65ce4abbce1)
+
+Then uploaded the chisel executable to the server and ran it:
+
+
+![Screenshot 2023-06-07 123637](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/8c80b9c9-5bd5-4740-abe7-2be901a2cb5c)
+
+On my attacking machine I set up the chisel client (tunelling traffic via socks proxy):
+
+
+![Screenshot 2023-06-07 135345](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/2c40ae66-0389-43eb-b03a-b08ab1533c37)
+
+After connecting, I used the Foxy Proxy browser extension to access the web page that was now being tunnelled from the .100 machine.
+
+Success!
+
+
+
+![Screenshot 2023-06-07 135313](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/a04131cd-1d9e-43df-be46-9e155607a25d)
 
 
 
