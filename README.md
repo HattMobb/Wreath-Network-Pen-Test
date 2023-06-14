@@ -181,6 +181,19 @@ Success!
 
 ![Screenshot 2023-06-07 135313](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/a04131cd-1d9e-43df-be46-9e155607a25d)
 
+Now, whilst the webpage is accessible and can be enumerated, this would again be occuring through 2 proxies and would be painfully slow. However, the brief mentioned that the git server is used for version control here, which presents an easier potential alternative form of enumeration.
+
+Finding the repository was relatively easy, given the WinRM access: 
+
+![Screenshot 2023-06-07 140203](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/a6b01593-1ca3-4c43-99e5-1bdc1389e271)
+
+Upon downloading, I used the extractor tool from GitTools (https://github.com/internetwache/GitTools) to view readable data and ended up with 3 local directories:
+
+
+
+![Screenshot 2023-06-07 142259](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/19225637-f910-414b-954b-18b6f531d507)
+
+
 
 
 
