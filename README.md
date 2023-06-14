@@ -135,6 +135,22 @@ Followed by `lsadump::sam` to get the hashes:
 After a few unsuccessful attempts and a wait, I managed to crack the hash for the user Thomas.
 
 
+Using the Admin hash I was able to connect to the machine via WinRM for total exploitation of the .150 machine:
+
+
+
+![Screenshot 2023-06-07 113614](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/46e28889-287e-428b-b7c4-57221d1cef8a)
+
+
+## Personal Pc Enumeration
+
+Referring back to the Network Map, only the personal PC remained to be compromised:
+
+![Screenshot 2023-06-06 123740](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/69e2c024-c647-4943-b284-6b655abfc086)
+
+As mentioned in the brief, this machine has an Anti-virus installed, so I had to be aware of this going forward.
+Given this was a Windows host and I was now accessing it via 2 proxies, nmap was unlikely to be of much use, so I uploaded the Portscan.ps1 script from Powersploit to the machine via WinRM.
+A scan of the final machine (.100) revealed ports 80 & 3389 to be open.
 
 
 
