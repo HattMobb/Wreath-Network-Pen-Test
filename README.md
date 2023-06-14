@@ -211,3 +211,15 @@ Navigating to the site within the browser reveals a login page but luckily I man
 
 Now I had to find someway to take advantage of the upload function.
 
+There are a few checks evident in the code that I had to be aware of (common rules such as file type, size and if the file is already present) but the process of bypassing these was pretty straightforward.
+Changing the file extension to .php satisfies the file type filter but the `getimagesize()` function checks specifically for images:
+
+```
+
+$size = getimagesize($_FILES["file"]["tmp_name"]);
+if(!in_array(explode(".", $_FILES["file"]["name"])[1], $goodExts) || !$size){
+    header("location: ./?msg=Fail");
+    die();
+
+```
+
