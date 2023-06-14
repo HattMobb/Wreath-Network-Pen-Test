@@ -193,7 +193,21 @@ Upon downloading, I used the extractor tool from GitTools (https://github.com/in
 
 ![Screenshot 2023-06-07 142259](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/19225637-f910-414b-954b-18b6f531d507)
 
+Drilling down through the directories I found the components of the web site:
 
 
 
+![Screenshot 2023-06-07 142631](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/80c86faf-936a-45b6-b22b-ba2c9928ea9c)
+
+
+Within the index.php was a funciton that allowed file uploads (thus a potential vulnerability):
+
+![Screenshot 2023-06-07 142906](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/474b67e9-ee3d-4d5f-b15f-30ffd1951dab)
+
+
+Navigating to the site within the browser reveals a login page but luckily I managed to crack Thomas' password hash earlier and was granted access:
+
+![image](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/0023cd21-39f7-42e5-bcff-1ae85a2baf77)
+
+Now I had to find someway to take advantage of the upload function.
 
