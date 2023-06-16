@@ -289,4 +289,19 @@ Access : BUILTIN\Users Allow  FullControl
          BUILTIN\Administrators Allow  FullControl
 ```
 
+In order to take advantage of these permissons a small wrapper script would likely bypass the instance of Defender running on this PC and be able to activate the netcat binary that is already present, thus estabilishing a shell as the local system.
+The wrapper is as follows (you can see that `ProcessStartInfo` runs the binary and calls back to the attacking machine):
 
+![image](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/0a0626ef-6d47-4b80-a95a-8d28ba677d1a)
+
+Once compiled and uploaded to the machine (I used the python server again) I started a local listener and then stopped and started the service on the compromised machine:
+
+` sc stop SystemExplorerHelpService `
+` sc start SystemExplorerHelpService `
+
+Listener:
+```
+C:\Windows\system32>whoami
+whoami
+nt authority\system
+```
