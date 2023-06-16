@@ -294,7 +294,8 @@ The wrapper is as follows (you can see that `ProcessStartInfo` runs the binary a
 
 ![image](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/0a0626ef-6d47-4b80-a95a-8d28ba677d1a)
 
-Once compiled and uploaded to the machine (I used the python server again) I started a local listener and then stopped and started the service on the compromised machine:
+I then compiled and uploaded to the machine (I used the python server again).
+Finally, I copied the script to ` C:\Program Files (x86)\System Explorer\System.exe` , started a local listener and then stopped and started the service on the compromised machine:
 
 ` sc stop SystemExplorerHelpService `
 ` sc start SystemExplorerHelpService `
