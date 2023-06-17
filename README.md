@@ -306,3 +306,7 @@ C:\Windows\system32>whoami
 whoami
 nt authority\system
 ```
+
+![Screenshot 2023-06-07 140706](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/213952a3-a4af-471f-8aa2-f306c02fea69)
+
+
