@@ -1,7 +1,7 @@
 # Wreath-Network-Pen-Test
 A write up of a pen test of the Wreath Network on TryHackMe
 
-## Write-up
+# Write-up
 
 ## Overview
 This was a "grey-box" penetration test of the Wreath network infrastructure and the brief was as follows:
@@ -15,7 +15,29 @@ Attack scope was restricted to the public webserver (10.200.57.200) and it's con
 
 The public facing web server was compromised using a publicly available exploit which ran as a root. This system was then used to pivot to the next machine in the internal network. This next machine hosted an internal GitStack server which was vulnerable to an exploit that allowed access to the systems user, resulting in system compromise and plain text passwords access. These passwords allowed authentication to the development server that was accessed via proxy from the GitStack server. A webpage on the development server contained an upload function that only used basic upload validation, which ultimately enabled the upload of a web shell and total compromise the final target. Outdated software was responsible for vunlerabilities that lead to immediate root access on two of the three machines and insecure code on a web page lead to malicious file upload and compromise of the third machine.
 
-## Walkthrough
+## Findings
+
+### Outdated/ Unpatched software - Severity: HIGH
+
+![CVE-2019-15107](https://www.cvedetails.com/cve-details.php?t=1&cve_id=CVE-2019-15107) : MiniServ 1.890 (Webmin httpd)
+
+Critical level vulnerability on public facing web-server that allows remote code execution(RCE) / total compromise when exploited.
+
+![CVE-2018-5955](https://www.cvedetails.com/cve/CVE-2018-5955/) : GitStack 2.3.10
+
+High level vulnerability on the GitStack server that allows user to log in as system when exploited.
+
+
+#### Remediation:
+
+Update to latest patch and maintain active patching schedule to keep up with new updates.
+
+
+### 
+
+
+
+# Walkthrough
 
 ## Enumeration of Web Server
 
