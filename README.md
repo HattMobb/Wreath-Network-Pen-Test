@@ -75,6 +75,18 @@ Use a trusted password manager if needed.
 
 ---
 
+### Improper Error Handling - Severity : MEDIUM
+
+Errors displayed by Django on the public facing web-server give away other page addresses that can then be accessed by users.
+
+This in itself ins't disasterous, however it directly lead to a page that was vulnerable to a publicly known exploit.
+
+#### Remediation:
+
+Configure the web framework to display as little information as possible in error messages to prevent attackers gaining infomation about the server. 
+
+---
+
 # Walkthrough
 
 ## Enumeration of Web Server
