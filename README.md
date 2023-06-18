@@ -32,6 +32,11 @@ After configuring and running the script, I was granted a root shell on the serv
 
 Following this, I made a copy of both the root password hash and ssh private key for future access.
 
+![Screenshot 2023-06-05 124435](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/44fb7e29-69e8-4762-9f90-b39cac521b56)
+
+
+
+
 # Pivoting 
 
 ## Git server Enumeration
