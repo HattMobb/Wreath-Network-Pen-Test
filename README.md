@@ -3,10 +3,15 @@ A write up of a pen test of the Wreath Network on TryHackMe
 
 ## Write-up
 
-## Executive Summary
+## Overview
 This was a "grey-box" penetration test of the Wreath network infrastructure and the brief was as follows:
 
 *There are two machines on my home network that host projects and stuff I'm working on in my own time -- one of them has a webserver that's port forwarded, so that's your way in if you can find a vulnerability! It's serving a website that's pushed to my git server from my own PC for version control, then cloned to the public facing server. See if you can get into these! My own PC is also on that network, but I doubt you'll be able to get into that as it has protections turned on, doesn't run anything vulnerable, and can't be accessed by the public-facing section of the network. Well, I say PC -- it's technically a repurposed server because I had a spare license lying around, but same difference.*
+
+## Scope
+Attack scope was restricted to the public webserver (10.200.57.200) and it's connected machines and/or services. 
+
+## Executive Summary
 
 The public facing web server was compromised using a publicly available exploit which ran as a root. This system was then used to pivot to the next machine in the internal network. This next machine hosted an internal GitStack server which was vulnerable to an exploit that allowed access to the systems user, resulting in system compromise and plain text passwords access. These passwords allowed authentication to the development server that was accessed via proxy from the GitStack server. A webpage on the development server contained an upload function that only used basic upload validation, which ultimately enabled the upload of a web shell and total compromise the final target. Outdated software was responsible for vunlerabilities that lead to immediate root access on two of the three machines and insecure code on a web page lead to malicious file upload and compromise of the third machine.
 
