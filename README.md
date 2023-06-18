@@ -1,5 +1,5 @@
 # Wreath-Network-Pen-Test
-A write up of a pen test of the Wreath Network on TryHackMe
+A report and step by step walkthrough of a penetration test of the Wreath Network on TryHackMe.
 
 # Write-up
 
@@ -64,8 +64,16 @@ Ensure the path isn't unqouted and set correct directory ownership to prevent un
 
 ---
 
+### Weak Password Policy - Severity : HIGH
 
+Accounts were found to use weak credentials (account beloning to Thomas) that were easily brute-forced and the passwords were used across multiple services.
 
+#### Remediation:
+
+Follow proper password policy regarding complexity, history etc
+Use a trusted password manager if needed.
+
+---
 
 # Walkthrough
 
