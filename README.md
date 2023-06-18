@@ -17,7 +17,7 @@ The public facing web server was compromised using a publicly available exploit 
 
 ## Findings
 
-### Outdated/ Unpatched software - Severity: HIGH
+### Outdated/ Unpatched software - Severity: CRITICAL
 
 ![CVE-2019-15107](https://www.cvedetails.com/cve-details.php?t=1&cve_id=CVE-2019-15107) : MiniServ 1.890 (Webmin httpd)
 
@@ -32,8 +32,38 @@ High level vulnerability on the GitStack server that allows user to log in as sy
 
 Update to latest patch and maintain active patching schedule to keep up with new updates.
 
+---
 
-### 
+### Unrestricted File Upload - Severity : HIGH
+
+Poor upload validation within the developer web page php code lead to a web shell being uploaded.
+
+#### Remediation:
+
+Implement stronger client + server side validation for any upload fields within the web page. Remove all unnessecary upload fields.
+
+---
+
+### Improper Privilege Management - Severity : HIGH
+
+Both WebMin and GitStack services were running with highest possible privileges. When exploited, these services grant an attacker this same level of control over the system.
+
+#### Remediation:
+
+Follow the Rule of Least Privilege - services, software, users etc should only be granted the minimum permissions possible for them to carry out their intended function.
+
+---
+
+### Unquoted Service Path - Severity : HIGH
+
+The `SystemExplorerHelpService` path was unqouted and allowed malicious file upload to " Wreath-PC " machine.
+
+#### Remediation:
+
+Ensure the path isn't unqouted and set correct directory ownership to prevent unauthorized tampering in the future.
+
+---
+
 
 
 
@@ -162,8 +192,8 @@ Using this share, I was able to launch Mimikatz in order to dump local SAM hashe
 
 From here, I used :
 
-`privilege::debug` essentially grants the process higher privileges, enabling it to bypass certain security restrictions.
-`token::elevate` attempts to elevate the current user's access token to a higher privilege level.
+`privilege::debug`which essentially grants the process higher privileges, enabling it to bypass certain security restrictions.
+`token::elevate` which attempts to elevate the current user's access token to a higher privilege level.
 
 Followed by `lsadump::sam` to get the hashes:
 
