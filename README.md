@@ -1,8 +1,6 @@
 # Wreath-Network-Pen-Test
 A report and step by step walkthrough of a penetration test of the Wreath Network on TryHackMe.
 
-# Write-up
-
 ## Overview
 This was a "grey-box" penetration test of the Wreath network infrastructure and the brief was as follows:
 
@@ -75,7 +73,7 @@ Use a trusted password manager if needed.
 
 ---
 
-### Improper Error Handling - Severity : MEDIUM
+### Improper Error Handling - Severity : LOW
 
 Errors displayed by Django on the public facing web-server give away other page addresses that can then be accessed by users.
 
@@ -87,7 +85,11 @@ Configure the web framework to display as little information as possible in erro
 
 ---
 
-# Walkthrough
+## Conclusion
+
+
+
+# Attack Narrative
 
 ## Enumeration of Web Server
 
@@ -399,3 +401,6 @@ nt authority\system
 ![Screenshot 2023-06-07 140706](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/213952a3-a4af-471f-8aa2-f306c02fea69)
 
 
+## Conclusion
+
+This concludes a successful penetration test on the Wreath Network. A multitude of serious vulnerabilities lead to multiple system compromise at the highest level and suggested remediations for these issues can be found in the Findings section of the report. On a positive note, this network can easily be hardened by following simple security procedures (Least privilege, password security, patching schedule etc) that will have no significantly disruptive impact on the functioning of any of the machines or services involved.
