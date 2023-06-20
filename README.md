@@ -85,19 +85,17 @@ Configure the web framework to display as little information as possible in erro
 
 ---
 
-## Conclusion
-
 
 
 # Attack Narrative
 
 ## Enumeration of Web Server
 
-A quick scan reveals a few services open on the reachable web server: 
+Beginning with recon of the publicly facing web server, a quick scan revealed a few open services: 
 
 ![Screenshot 2023-06-05 121320](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/3fcfa5a6-1bb2-45ac-86ce-96b7c07f7700)
 
-The website doesn't is only accessible after adding the IP to the local /hosts file:
+The website is only accessible after adding the IP to the local /hosts file:
 
 
 
@@ -116,7 +114,7 @@ I used the following tool to exploit this vulnerability: https://github.com/Muir
 After configuring and running the script, I was granted a root shell on the server:
 ![Screenshot 2023-06-05 125304](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/c9c97089-e9fd-47cf-aa64-8e53db929eea)
 
-Following this, I made a copy of both the root password hash and ssh private key for future access.
+Following this, I made a copy of both the root password hash and ssh private key for future system persistence/ access.
 
 ![Screenshot 2023-06-05 124435](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/44fb7e29-69e8-4762-9f90-b39cac521b56)
 
@@ -140,13 +138,13 @@ Scan result:
 
 Success, both .150 and .100 machines are fair game.
 Futher scanning of each machine individually revealed a few services running on .150 (including a web page) so I decided to attempt to pivot to this machine.
-This was done using sshuttle - a program that works in a similar manner to a VPN, allowing direct connection to remote devices as if they were local.
+This was done using sshuttle - a program that works in a similar manner to a VPN, allowing direct connection to remote devices as if they were on the local network.
 I was able to sign in as root on this machine using the SSH key from earlier. 
 
 ![Screenshot 2023-06-06 111757](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/d6433b0f-5dfe-417a-8190-0bf627827211)
 
 
-Navigating to the web page hosted by 1.50 didn't reveal much, however poor error handling practices pointed me towards a potential attack vector.
+Navigating to the web page hosted by .150 didn't reveal much, however poor error handling practices pointed me towards a potential attack vector.
 
 ![Screenshot 2023-06-06 112503](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/c427dd99-2315-4e9d-96d1-c07c2dc66c94)
 
@@ -170,18 +168,18 @@ In action:
 
 ![Screenshot 2023-06-06 120500](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/381ac367-3fda-4cef-9e14-9a86d91aa7a6)
 
-In order to efficiently execute commands & gain information about the machine, I used BurpSuite to interact with the device:
+In order to efficiently execute commands & gain information about the machine, I used BurpSuite to execute commands:
 
 ![Screenshot 2023-06-06 121901](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/f4080a43-904e-4a44-96fd-2fd3955cbaa8)
 
 
 In order to deploy a shell, the .150 machine needed to be able to reach/ communicate with my machine.
-I tested this via `ping` using the exploit and `tcpdump` on my machine, however no traffic was getting through successfully, indicating that it was being blocked (likely by a firewall).
+I tested this via `ping` using the exploit and `tcpdump` on locally, however no traffic was getting through successfully, indicating that it was being blocked (likely by a firewall).
 To navigate this issue, I opened a port, allowing traffic through the firewall:
 
 ![Screenshot 2023-06-07 103640](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/2faf878d-3098-4288-8de7-59bae31cca4f)
 
-Next I set up a Netcat listener on the .200 machine, and used a Powershell command to create a shell to call back to it:
+Next I set up a Netcat listener on the .200 machine (which was passing traffic to my attcking machine) and used a Powershell command to create a shell to call back to it:
 
 
 ![Screenshot 2023-06-07 110211](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/d280e7b2-4fe7-41f5-912e-35a0004d1c2e)
@@ -215,6 +213,7 @@ Using this share, I was able to launch Mimikatz in order to dump local SAM hashe
 From here, I used :
 
 `privilege::debug`which essentially grants the process higher privileges, enabling it to bypass certain security restrictions.
+
 `token::elevate` which attempts to elevate the current user's access token to a higher privilege level.
 
 Followed by `lsadump::sam` to get the hashes:
@@ -272,7 +271,7 @@ Success!
 
 ![Screenshot 2023-06-07 135313](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/a04131cd-1d9e-43df-be46-9e155607a25d)
 
-Now, whilst the webpage is accessible and can be enumerated, this would again be occuring through 2 proxies and would be painfully slow. However, the brief mentioned that the git server is used for version control here, which presents an easier potential alternative form of enumeration.
+Now, whilst the webpage is accessible and can be enumerated, this would again be occuring through 2 proxies and would be too slow to tolerate. However, the brief mentioned that the git server is used for version control here, which presents an easier potential alternative form of enumeration in the form of a repository/ source codebase.
 
 Finding the repository was relatively easy, given the WinRM access: 
 
@@ -399,6 +398,10 @@ nt authority\system
 ```
 
 ![Screenshot 2023-06-07 140706](https://github.com/HattMobb/Wreath-Network-Pen-Test/assets/134090089/213952a3-a4af-471f-8aa2-f306c02fea69)
+
+## Clean up
+
+Upon total compromise completion of the network, all uploaded binaries, executables and created accounts etc were purged from the target systems, leaving them in the same state they were in before testing began. Whilst this operation was not conducted with discretion in mind, I strive to leave as little trace of my presence as possible for the sake of the client and general tidiness.   
 
 
 ## Conclusion
